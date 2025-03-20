@@ -26,91 +26,108 @@ struct ContentView: View {
         Letter(id: 5, text: "G"),
     ]
     @State var guessedLetters: [Letter] = []
+    @State var showSuccess = false
+    @State var showFailure = false
     let correctAnsweer = "ORANGE"
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack{
-                Color.background
-                    .ignoresSafeArea()
-                VStack {
+            GeometryReader { proxy in
+                ZStack{
+                    Color.background
+                        .ignoresSafeArea()
                     VStack {
-                        Spacer()
-                        Image("orange")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                        Spacer()
-                        HStack{
-//                            ForEach (Array(guessedLetters.enumerated()), id: \.1) { index,
-                            ForEach (guessedLetters) {
-                                guessedLetter in
-                                VStack{
-                                    LetterView(letter: guessedLetter)
-                                        .onTapGesture {
-
-                                            if let index = guessedLetters.firstIndex(of: guessedLetter) {
-                                                guessedLetters.remove(at: index)
-                                                letters[guessedLetter.id].text = guessedLetter.text
+                        VStack {
+                            Spacer()
+                            Image("orange")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                            Spacer()
+                            HStack{
+                                //                            ForEach (Array(guessedLetters.enumerated()), id: \.1) { index,
+                                ForEach (guessedLetters) {
+                                    guessedLetter in
+                                    VStack{
+                                        LetterView(letter: guessedLetter)
+                                            .onTapGesture {
+                                                
+                                                if let index = guessedLetters.firstIndex(of: guessedLetter) {
+                                                    guessedLetters.remove(at: index)
+                                                    letters[guessedLetter.id].text = guessedLetter.text
+                                                }
+                                                
+                                                //                                            guessedLetters.remove(at: index)//터치된 글자 표시 삭제
+                                                //                                            letters[guessedLetter.id].text=guessedLetter.text//표시된 글자 터치시 다시 터치전상태로 돌아감
                                             }
-                                            
-//                                            guessedLetters.remove(at: index)//터치된 글자 표시 삭제
-//                                            letters[guessedLetter.id].text=guessedLetter.text//표시된 글자 터치시 다시 터치전상태로 돌아감
-                                        }
-                                    
-                                    Rectangle()
-                                        .fill(Color.white)
-                                        .frame(width: 25, height: 2)
+                                        
+                                        Rectangle()
+                                            .fill(Color.white)
+                                            .frame(width: 25, height: 2)
+                                    }
                                 }
                             }
+                            .padding(.bottom, 20)
                         }
-                        .padding(.bottom, 20)
-                    }
-                    .frame(width: proxy.size.width * 0.9,
-                           height: proxy.size.width * 0.9)
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.border, lineWidth: 2)
-                    }
-                    Text("Score 0")
-                        .font(.system(size: 15))
-                        .foregroundStyle(Color.white)
-                        .padding(.top)
-                    HStack{
-                        ForEach(Array(letters.enumerated()), id: \.1){
-                            index, letter in
-                            LetterView(letter: letter)
-                                .onTapGesture {
-                                    if !letter.text.isEmpty { //글자가 없을때 터치하면 추가하지 못하게
-                                        guessedLetters.append(letter)
-                                        letters[index].text  = ""
-                                        if guessedLetters.count == letters.count {
-                                            //evaluate if right of wrong
-//                                            var guessedAnswer = ""
-//                                            for guessedLetter in guessedLetters {
-//                                                guessedAnswer += guessedLetter.text
-//                                            }
-                                            let gussedAnswer = guessedLetters.map { $0.text}.joined()
-                                            if gussedAnswer == correctAnsweer {
-                                                print("correct answer")
-                                            } else {
-                                                print("wrong answer")
+                        .frame(width: proxy.size.width * 0.9,
+                               height: proxy.size.width * 0.9)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.border, lineWidth: 2)
+                        }
+                        Text("Score 0")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color.white)
+                            .padding(.top)
+                        HStack{
+                            ForEach(Array(letters.enumerated()), id: \.1){
+                                index, letter in
+                                LetterView(letter: letter)
+                                    .onTapGesture {
+                                        if !letter.text.isEmpty { //글자가 없을때 터치하면 추가하지 못하게
+                                            guessedLetters.append(letter)
+                                            letters[index].text  = ""
+                                            if guessedLetters.count == letters.count {
+                                                let gussedAnswer = guessedLetters.map { $0.text}.joined()
+                                                if gussedAnswer == correctAnsweer {
+                                                    showSuccess = true
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                                        showSuccess = false
+                                                    })
+                                                } else {
+                                                    showFailure = true
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                                        showFailure = false
+                                                    })
+                                                }
                                             }
                                         }
                                     }
-                                }
+                            }
+                            //                        ForEach(letters, id: \.self){ letter in
+                            //                            LetterView(character: letter)
+                            //                                .onTapGesture {   // ORANGE를 터치했을때
+                            //                                guessedLetters
+                            //                                        .append(letter)
+                            ////                                    print("tapped latter view \(letter)")
+                            //                                }
+                            //                        }
                         }
-//                        ForEach(letters, id: \.self){ letter in
-//                            LetterView(character: letter)
-//                                .onTapGesture {   // ORANGE를 터치했을때
-//                                guessedLetters
-//                                        .append(letter)
-////                                    print("tapped latter view \(letter)")
-//                                }
-//                        }
+                    }
+                    if showFailure {
+                        VStack{
+                            Image("cross")
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.black.opacity(0.3))
+                    }
+                    if showSuccess {
+                        VStack{
+                            Image("tick")
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.black.opacity(0.3))
                     }
                 }
             }
-        }
     }
 }
 
