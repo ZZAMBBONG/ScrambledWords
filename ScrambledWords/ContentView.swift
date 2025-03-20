@@ -11,7 +11,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var letters: [String] = ["O","R", "A", "N", "G", "E"]
+    @State var letters: [Letter] = [
+        Letter(id: 0, text: "A"),
+        Letter(id: 1, text: "O"),
+        Letter(id: 2, text: "R"),
+        Letter(id: 3, text: "A"),
+        Letter(id: 4, text: "N"),
+        Letter(id: 5, text: "G"),
+    ]
+    @State var guessedLetters: [Letter] = []
     
     var body: some View {
         GeometryReader { proxy in
@@ -26,11 +34,15 @@ struct ContentView: View {
                             .frame(width: 100, height: 100)
                         Spacer()
                         HStack{
-                            VStack{
-                                LetterView(character: "")
-                                Rectangle()
-                                    .fill(Color.white)
-                                    .frame(width: 25, height: 2)
+                            ForEach (guessedLetters) {
+                                guessedLetter in
+                                VStack{
+                                    LetterView(letter: guessedLetter)
+                                    
+                                    Rectangle()
+                                        .fill(Color.white)
+                                        .frame(width: 25, height: 2)
+                                }
                             }
                         }
                         .padding(.bottom, 20)
@@ -46,9 +58,24 @@ struct ContentView: View {
                         .foregroundStyle(Color.white)
                         .padding(.top)
                     HStack{
-                        ForEach(letters, id: \.self){ letter in
-                            LetterView(character: letter)
+                        ForEach(Array(letters.enumerated()), id: \.1){
+                            index, letter in
+                            LetterView(letter: letter)
+                                .onTapGesture {
+                                    if !letter.text.isEmpty { //글자가 없을때 터치하면 추가하지 못하게
+                                        guessedLetters.append(letter)
+                                        letters[index].text  = ""
+                                    }
+                                }
                         }
+//                        ForEach(letters, id: \.self){ letter in
+//                            LetterView(character: letter)
+//                                .onTapGesture {   // ORANGE를 터치했을때
+//                                guessedLetters
+//                                        .append(letter)
+////                                    print("tapped latter view \(letter)")
+//                                }
+//                        }
                     }
                 }
             }
@@ -61,9 +88,9 @@ struct ContentView: View {
 }
 
 struct LetterView: View {
-    let character: String
+    let letter: Letter
     var body: some View {
-        Text(character)
+        Text(letter.text)
             .font(.system(size: 15, weight: .semibold))
             .foregroundStyle(Color.white)
             .frame(width: 30, height: 30)

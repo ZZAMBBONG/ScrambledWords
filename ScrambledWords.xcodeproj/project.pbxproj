@@ -6,17 +6,24 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9B23B92F2D8BE85400E6ECBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B23B9282D8BE85400E6ECBD /* Preview Assets.xcassets */; };
+		9B23B9302D8BE85400E6ECBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B23B92A2D8BE85400E6ECBD /* Assets.xcassets */; };
+		9B23B9312D8BE85400E6ECBD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B23B92B2D8BE85400E6ECBD /* Colors.xcassets */; };
+		9B23B9322D8BE85400E6ECBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B92C2D8BE85400E6ECBD /* ContentView.swift */; };
+		9B23B9332D8BE85400E6ECBD /* ScrambledWordsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B92D2D8BE85400E6ECBD /* ScrambledWordsApp.swift */; };
+		9B23B9362D8BE85E00E6ECBD /* LetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		9B23B9282D8BE85400E6ECBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9B23B92A2D8BE85400E6ECBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9B23B92B2D8BE85400E6ECBD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		9B23B92C2D8BE85400E6ECBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9B23B92D2D8BE85400E6ECBD /* ScrambledWordsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambledWordsApp.swift; sourceTree = "<group>"; };
+		9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterModel.swift; sourceTree = "<group>"; };
 		9B3CAF262D8AC26A008513BD /* ScrambledWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrambledWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		9B3CAF282D8AC26A008513BD /* ScrambledWords */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ScrambledWords;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9B3CAF232D8AC26A008513BD /* Frameworks */ = {
@@ -29,10 +36,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B23B9292D8BE85400E6ECBD /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9B23B9282D8BE85400E6ECBD /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9B23B92E2D8BE85400E6ECBD /* ScrambledWords */ = {
+			isa = PBXGroup;
+			children = (
+				9B23B9292D8BE85400E6ECBD /* Preview Content */,
+				9B23B92A2D8BE85400E6ECBD /* Assets.xcassets */,
+				9B23B92B2D8BE85400E6ECBD /* Colors.xcassets */,
+				9B23B92C2D8BE85400E6ECBD /* ContentView.swift */,
+				9B23B92D2D8BE85400E6ECBD /* ScrambledWordsApp.swift */,
+				9B23B9352D8BE85E00E6ECBD /* Models */,
+			);
+			path = ScrambledWords;
+			sourceTree = "<group>";
+		};
+		9B23B9352D8BE85E00E6ECBD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9B3CAF1D2D8AC26A008513BD = {
 			isa = PBXGroup;
 			children = (
-				9B3CAF282D8AC26A008513BD /* ScrambledWords */,
+				9B23B92E2D8BE85400E6ECBD /* ScrambledWords */,
 				9B3CAF272D8AC26A008513BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,9 +95,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				9B3CAF282D8AC26A008513BD /* ScrambledWords */,
 			);
 			name = ScrambledWords;
 			packageProductDependencies = (
@@ -109,6 +142,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B23B92F2D8BE85400E6ECBD /* Preview Assets.xcassets in Resources */,
+				9B23B9302D8BE85400E6ECBD /* Assets.xcassets in Resources */,
+				9B23B9312D8BE85400E6ECBD /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B23B9362D8BE85E00E6ECBD /* LetterModel.swift in Sources */,
+				9B23B9322D8BE85400E6ECBD /* ContentView.swift in Sources */,
+				9B23B9332D8BE85400E6ECBD /* ScrambledWordsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
