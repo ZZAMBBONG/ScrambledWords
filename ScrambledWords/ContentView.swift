@@ -20,6 +20,7 @@ struct ContentView: View {
         Letter(id: 5, text: "G"),
     ]
     @State var guessedLetters: [Letter] = []
+    let correctAnsweer = "ORANGE"
     
     var body: some View {
         GeometryReader { proxy in
@@ -76,6 +77,19 @@ struct ContentView: View {
                                     if !letter.text.isEmpty { //글자가 없을때 터치하면 추가하지 못하게
                                         guessedLetters.append(letter)
                                         letters[index].text  = ""
+                                        if guessedLetters.count == letters.count {
+                                            //evaluate if right of wrong
+                                            var guessedAnswer = ""
+                                            for guessedLetter in guessedLetters {
+                                                guessedAnswer += guessedLetter.text
+                                            }
+                                            if guessedAnswer == correctAnsweer {
+                                                print("correct answer")
+                                            } else {
+                                                print("wrong answer")
+                                            }
+                                            
+                                        }
                                     }
                                 }
                         }
