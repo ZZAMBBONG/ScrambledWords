@@ -7,56 +7,16 @@
 
 import SwiftUI
 
-//Hashable
-
-//map, compactMap, filter, firstIndex, reduce
-
-//map - transforms
-
-
-
-struct ContentView: View {
+struct GameView: View {
     
-//    @State var letters: [Letter] = [
-//        Letter(id: 0, text: "A"),
-//        Letter(id: 1, text: "O"),
-//        Letter(id: 2, text: "R"),
-//        Letter(id: 3, text: "E"),
-//        Letter(id: 4, text: "N"),
-//        Letter(id: 5, text: "G"),
-//    ]
     @State private var guessedLetters: [Letter] = []
     @State private var showSuccess = false
     @State private var showFailure = false
     @State private var score = 0
-//    let correctAnsweer = "ORANGE"
-    @State var questions: [Question] = [
-        Question(image: "orange", scrampledletters: [
-            Letter(id: 0, text: "A"),
-            Letter(id: 1, text: "O"),
-            Letter(id: 2, text: "R"),
-            Letter(id: 3, text: "E"),
-            Letter(id: 4, text: "N"),
-            Letter(id: 5, text: "G")
-        ], answer: "ORANGE"),
-        Question(image: "banana", scrampledletters: [
-            Letter(id: 0, text: "A"),
-            Letter(id: 1, text: "A"),
-            Letter(id: 2, text: "N"),
-            Letter(id: 3, text: "B"),
-            Letter(id: 4, text: "N"),
-            Letter(id: 5, text: "A")
-        ], answer: "BANANA"),
-        Question(image: "apple", scrampledletters: [
-            Letter(id: 0, text: "P"),
-            Letter(id: 1, text: "A"),
-            Letter(id: 2, text: "P"),
-            Letter(id: 3, text: "E"),
-            Letter(id: 4, text: "L"),
-        ], answer: "APPLE")
-    ]
-    
+    @State var questions: [Question] = Question.generateQuestions()
     @State private var currentQuestionIndex = 0 // 질문설정
+    @State private var showFinalScore = false
+    
     
     var body: some View {
             GeometryReader { proxy in
@@ -132,7 +92,7 @@ struct ContentView: View {
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                                                         showFailure = false
                                                         if currentQuestionIndex == questions.count - 1 {
-                                                            
+                                                            showFinalScore = true
                                                         } else {
                                                             currentQuestionIndex += 1  // 성공으로끝나면 다음게임을 위해 질문을 바꾼다.
                                                         }
@@ -169,21 +129,17 @@ struct ContentView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showFinalScore) {
+                questions =  Question.generateQuestions()
+                currentQuestionIndex = 0
+                score = 0
+                
+            } content: {
+                ScoreView(score: score, questionCount: questions.count)
+            }
     }
 }
 
 #Preview {
-    ContentView()
-}
-
-struct LetterView: View {
-    let letter: Letter
-    var body: some View {
-        Text(letter.text)
-            .font(.system(size: 15, weight: .semibold))
-            .foregroundStyle(Color.white)
-            .frame(width: 30, height: 30)
-            .background(Color.white.opacity(0.4))
-            .clipShape(RoundedRectangle(cornerRadius: 4))
-    }
+    GameView()
 }
