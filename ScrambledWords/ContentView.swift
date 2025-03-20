@@ -9,6 +9,12 @@ import SwiftUI
 
 //Hashable
 
+//map, compactMap, filter, firstIndex, reduce
+
+//map - transforms
+
+
+
 struct ContentView: View {
     
     @State var letters: [Letter] = [
@@ -79,16 +85,16 @@ struct ContentView: View {
                                         letters[index].text  = ""
                                         if guessedLetters.count == letters.count {
                                             //evaluate if right of wrong
-                                            var guessedAnswer = ""
-                                            for guessedLetter in guessedLetters {
-                                                guessedAnswer += guessedLetter.text
-                                            }
-                                            if guessedAnswer == correctAnsweer {
+//                                            var guessedAnswer = ""
+//                                            for guessedLetter in guessedLetters {
+//                                                guessedAnswer += guessedLetter.text
+//                                            }
+                                            let gussedAnswer = guessedLetters.map { $0.text}.joined()
+                                            if gussedAnswer == correctAnsweer {
                                                 print("correct answer")
                                             } else {
                                                 print("wrong answer")
                                             }
-                                            
                                         }
                                     }
                                 }
