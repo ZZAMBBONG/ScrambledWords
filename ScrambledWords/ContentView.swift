@@ -45,7 +45,7 @@ struct ContentView: View {
             Letter(id: 2, text: "N"),
             Letter(id: 3, text: "B"),
             Letter(id: 4, text: "N"),
-            Letter(id: 5, text: "N")
+            Letter(id: 5, text: "A")
         ], answer: "BANANA"),
         Question(image: "apple", scrampledletters: [
             Letter(id: 0, text: "P"),
@@ -56,7 +56,7 @@ struct ContentView: View {
         ], answer: "APPLE")
     ]
     
-    @State private var currentQuestionIndex = 0
+    @State private var currentQuestionIndex = 0 // 질문설정
     
     var body: some View {
             GeometryReader { proxy in
@@ -120,13 +120,25 @@ struct ContentView: View {
                                                     score += 1
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                                                         showSuccess = false
+                                                        if currentQuestionIndex == questions.count - 1 {
+                                                            
+                                                        } else {
+                                                            currentQuestionIndex += 1  // 성공으로끝나면 다음게임을 위해 질문을 바꾼다.
+                                                        }
+                                                        
                                                     })
                                                 } else {
                                                     showFailure = true
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                                                         showFailure = false
+                                                        if currentQuestionIndex == questions.count - 1 {
+                                                            
+                                                        } else {
+                                                            currentQuestionIndex += 1  // 성공으로끝나면 다음게임을 위해 질문을 바꾼다.
+                                                        }
                                                     })
                                                 }
+                                                guessedLetters.removeAll()
                                             }
                                         }
                                     }
