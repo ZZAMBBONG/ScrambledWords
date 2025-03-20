@@ -13,6 +13,7 @@
 		9B23B9322D8BE85400E6ECBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B92C2D8BE85400E6ECBD /* ContentView.swift */; };
 		9B23B9332D8BE85400E6ECBD /* ScrambledWordsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B92D2D8BE85400E6ECBD /* ScrambledWordsApp.swift */; };
 		9B23B9362D8BE85E00E6ECBD /* LetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */; };
+		9B23B9382D8C008D00E6ECBD /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B23B9372D8C008D00E6ECBD /* QuestionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9B23B92C2D8BE85400E6ECBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9B23B92D2D8BE85400E6ECBD /* ScrambledWordsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambledWordsApp.swift; sourceTree = "<group>"; };
 		9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterModel.swift; sourceTree = "<group>"; };
+		9B23B9372D8C008D00E6ECBD /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		9B3CAF262D8AC26A008513BD /* ScrambledWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrambledWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				9B23B9342D8BE85E00E6ECBD /* LetterModel.swift */,
+				9B23B9372D8C008D00E6ECBD /* QuestionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				9B23B9362D8BE85E00E6ECBD /* LetterModel.swift in Sources */,
 				9B23B9322D8BE85400E6ECBD /* ContentView.swift in Sources */,
 				9B23B9332D8BE85400E6ECBD /* ScrambledWordsApp.swift in Sources */,
+				9B23B9382D8C008D00E6ECBD /* QuestionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
