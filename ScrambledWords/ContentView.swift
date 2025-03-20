@@ -15,7 +15,7 @@ struct ContentView: View {
         Letter(id: 0, text: "A"),
         Letter(id: 1, text: "O"),
         Letter(id: 2, text: "R"),
-        Letter(id: 3, text: "A"),
+        Letter(id: 3, text: "E"),
         Letter(id: 4, text: "N"),
         Letter(id: 5, text: "G"),
     ]
@@ -34,10 +34,21 @@ struct ContentView: View {
                             .frame(width: 100, height: 100)
                         Spacer()
                         HStack{
+//                            ForEach (Array(guessedLetters.enumerated()), id: \.1) { index,
                             ForEach (guessedLetters) {
                                 guessedLetter in
                                 VStack{
                                     LetterView(letter: guessedLetter)
+                                        .onTapGesture {
+
+                                            if let index = guessedLetters.firstIndex(of: guessedLetter) {
+                                                guessedLetters.remove(at: index)
+                                                letters[guessedLetter.id].text = guessedLetter.text
+                                            }
+                                            
+//                                            guessedLetters.remove(at: index)//터치된 글자 표시 삭제
+//                                            letters[guessedLetter.id].text=guessedLetter.text//표시된 글자 터치시 다시 터치전상태로 돌아감
+                                        }
                                     
                                     Rectangle()
                                         .fill(Color.white)
