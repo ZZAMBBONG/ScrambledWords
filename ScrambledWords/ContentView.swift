@@ -17,20 +17,20 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var letters: [Letter] = [
-        Letter(id: 0, text: "A"),
-        Letter(id: 1, text: "O"),
-        Letter(id: 2, text: "R"),
-        Letter(id: 3, text: "E"),
-        Letter(id: 4, text: "N"),
-        Letter(id: 5, text: "G"),
-    ]
-    @State var guessedLetters: [Letter] = []
-    @State var showSuccess = false
-    @State var showFailure = false
-    @State var score = 0
-    let correctAnsweer = "ORANGE"
-    var questions: [Question] = [
+//    @State var letters: [Letter] = [
+//        Letter(id: 0, text: "A"),
+//        Letter(id: 1, text: "O"),
+//        Letter(id: 2, text: "R"),
+//        Letter(id: 3, text: "E"),
+//        Letter(id: 4, text: "N"),
+//        Letter(id: 5, text: "G"),
+//    ]
+    @State private var guessedLetters: [Letter] = []
+    @State private var showSuccess = false
+    @State private var showFailure = false
+    @State private var score = 0
+//    let correctAnsweer = "ORANGE"
+    @State var questions: [Question] = [
         Question(image: "orange", scrampledletters: [
             Letter(id: 0, text: "A"),
             Letter(id: 1, text: "O"),
@@ -56,6 +56,8 @@ struct ContentView: View {
         ], answer: "APPLE")
     ]
     
+    @State private var currentQuestionIndex = 0
+    
     var body: some View {
             GeometryReader { proxy in
                 ZStack{
@@ -64,7 +66,7 @@ struct ContentView: View {
                     VStack {
                         VStack {
                             Spacer()
-                            Image("orange")
+                            Image(questions[currentQuestionIndex].image)
                                 .resizable()
                                 .frame(width: 100, height: 100)
                             Spacer()
@@ -75,10 +77,10 @@ struct ContentView: View {
                                     VStack{
                                         LetterView(letter: guessedLetter)
                                             .onTapGesture {
-                                                
                                                 if let index = guessedLetters.firstIndex(of: guessedLetter) {
                                                     guessedLetters.remove(at: index)
-                                                    letters[guessedLetter.id].text = guessedLetter.text
+                                                    questions[currentQuestionIndex].scrampledletters[guessedLetter.id].text = guessedLetter.text
+                                                    //letters[guessedLetter.id].text = guessedLetter.text
                                                 }
                                                 
                                                 //                                            guessedLetters.remove(at: index)//터치된 글자 표시 삭제
@@ -104,16 +106,16 @@ struct ContentView: View {
                             .foregroundStyle(Color.white)
                             .padding(.top)
                         HStack{
-                            ForEach(Array(letters.enumerated()), id: \.1){
-                                index, letter in
+//                            ForEach(Array(letters.enumerated()), id: \.1){ index, letter in
+                            ForEach(Array(questions[currentQuestionIndex].scrampledletters.enumerated()), id: \.1){ index, letter in
                                 LetterView(letter: letter)
                                     .onTapGesture {
                                         if !letter.text.isEmpty { //글자가 없을때 터치하면 추가하지 못하게
                                             guessedLetters.append(letter)
-                                            letters[index].text  = ""
-                                            if guessedLetters.count == letters.count {
+                                            questions[currentQuestionIndex].scrampledletters[index].text  = ""
+                                            if guessedLetters.count == questions[currentQuestionIndex].scrampledletters.count {
                                                 let gussedAnswer = guessedLetters.map { $0.text}.joined()
-                                                if gussedAnswer == correctAnsweer {
+                                                if gussedAnswer == questions[currentQuestionIndex].answer {
                                                     showSuccess = true
                                                     score += 1
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
